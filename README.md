@@ -5,4 +5,4 @@ This was my first attempt to scrape data from a website using the rvest package 
 
 I then took some time to clean up and prep the data for analysis.
 
-Finally, I did some basic analysis and vidualization on the rapid decline in audience of their flagship show, Raw, since the show expanded to three hours in 2012.
+Finally, I did some basic analysis and visualization on the rapid decline in audience of their flagship show, Raw, since the show expanded to three hours in 2012.
