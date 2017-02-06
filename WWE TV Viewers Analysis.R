@@ -24,6 +24,15 @@ ggplot(subset(ratings, date>=date_filter & viewers>1000000), aes(x=date, y=viewe
   ggtitle(paste("WWE Viewership Since", date_filter)) + 
   theme(plot.title = element_text(family = "Trebuchet MS", color="blue", face="bold", size=32, hjust=0))
 
+# Histogram of the distributions of viewers by show. 
+# We see Raw clearly has a wider range of outcomes with the graph moving further left every year.
+# SD is much more narrow.
+ggplot(subset(ratings, ratings$viewers>0), aes(x=viewers, fill=as.factor(year))) +
+  geom_histogram(position="stack", alpha=.5) + facet_wrap(~show)
+
+# Boxplot of the range of viewers each year
+ggplot(subset(ratings, ratings$viewers>0), aes(x=as.factor(year), y=viewers, fill=as.factor(year))) +
+  geom_boxplot() + facet_wrap(~show) + stat_summary(fun.y=mean, geom="point", shape=5, size=4)
 
 
 # Summarize the average viewers by month & year (removing all shows without viewer data)
@@ -89,3 +98,5 @@ ggplot(subset(months, months$show=="raw"),
 # appear to be some holdover rate that slowly erodes into the spring as opposed to one giant sudden drop.
 
 # September's decline is likely tied to the start of the new fall TV season and the NFL starting.
+
+
