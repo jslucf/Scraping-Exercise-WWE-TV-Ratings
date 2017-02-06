@@ -59,7 +59,6 @@ ggplot(seasons, aes(x=year, y=avg.viewers, color=season)) + geom_point() + geom_
 # That makes sense as the shows are building to the WWE's top-branded show, Wrestlemania, in early April.
 
 # It also shows that summer and fall, the times furthest removed from Wrestlemania, are consistently weakest.
-
 # In fact, fall 2016 Raws drew less on average than winter 2012 SDs, the only Raw season on the graph that
 # was outdrawn by any SD season on the graph.
 
