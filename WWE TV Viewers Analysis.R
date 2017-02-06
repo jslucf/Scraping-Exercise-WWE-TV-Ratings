@@ -57,15 +57,36 @@ ggplot(seasons, aes(x=year, y=avg.viewers, color=season)) + geom_point() + geom_
 
 # We can see a clear trend that January - March are consistently the highest viewed months, even in a decline.
 # That makes sense as the shows are building to the WWE's top-branded show, Wrestlemania, in early April.
+
 # It also shows that summer and fall, the times furthest removed from Wrestlemania, are consistently weakest.
+
 # In fact, fall 2016 Raws drew less on average than winter 2012 SDs, the only Raw season on the graph that
 # was outdrawn by any SD season on the graph.
 
 # To look more into this pre-Wrestlemania spike, let's see how April does compared to Jan.-March and 
 # see if there's any type of post-WM holdover.
-ggplot(subset(months, month %in% 1:3), 
+ggplot(subset(months, month %in% 1:4), 
        aes(x=year, y=avg.viewers, color=as.factor(month))) + geom_point() + 
           geom_smooth()  + facet_wrap(~show)
 
 # The graph shows that April consistently comes down from the first 3 months. This implies a rush of fans tune
 # in to build up WM, but WM itself has failed to keep those viewers watching beyond then.
+
+# Let's see if there are any other months that seem to have importance. First, let's add seasons to the months
+# table.
+months$season = ifelse(months$month %in% 1:3, "Winter", 
+                        ifelse(months$month %in% 4:6, "Spring", 
+                               ifelse(months$month %in% 7:9, "Summer", 
+                                      "Fall") ) )
+
+# Now we can compare each month within each season for Raw.
+ggplot(subset(months, months$show=="raw"),
+       aes(x=year, y=avg.viewers, col=as.factor(month))) + geom_point() + geom_smooth() + facet_wrap(~season)
+
+# It seems most months within each season are generally interchangeable, except April and September. April 
+# consistently is the highest drawing month in spring and September the least of the fall.
+
+# April figures to be tied to the timing of Wrestlemania. Even if viewers decline after the show, there does 
+# appear to be some holdover rate that slowly erodes into the spring as opposed to one giant sudden drop.
+
+# September's decline is likely tied to the start of the new fall TV season and the NFL starting.
